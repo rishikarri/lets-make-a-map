@@ -22,7 +22,7 @@
     }
 
     .subunit-boundary {
-        fill: none;
+        /* fill: blue; */
         stroke: #777;
         stroke-dasharray: 2, 2;
         stroke-linejoin: round;
@@ -74,18 +74,21 @@
                 })
                 .attr("d", path);
 
+
+            console.log(topojson.mesh(uk, uk.objects.subunits), 'topojson.mesh(uk, uk.objects.subunits');
             svg.append("path")
                 .datum(topojson.mesh(uk, uk.objects.subunits, function (a, b) {
-                    console.log(a, b, 'a, b');
-                    return a !== b && a.id !== "IRL";
+                    // console.log(a, b, 'a, b');
+                    return a === b;
                 }))
                 .attr("d", path)
-                .attr("class", "subunit-boundary");
+                .attr("class", "subunit-boundary")
+                .attr('fill', 'red')
 
-            svg.append("path")
-                .datum(topojson.mesh(uk, uk.objects.subunits, function (a, b) { return a === b && a.id === "IRL"; }))
-                .attr("d", path)
-                .attr("class", "subunit-boundary IRL");
+            // svg.append("path")
+            //     .datum(topojson.mesh(uk, uk.objects.subunits, function (a, b) { return a === b && a.id === "IRL"; }))
+            //     .attr("d", path)
+            //     .attr("class", "subunit-boundary IRL");
 
 
         });
